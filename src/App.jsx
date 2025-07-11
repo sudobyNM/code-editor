@@ -10,6 +10,7 @@ import { emmetJSX } from "emmet-monaco-es";
 const themeList = [
   "my-dark-theme",
   "my-light-theme",
+  "catppuccin",
   "my-solarized-theme",
   "my-solarized-dark-theme",
 ];
@@ -31,7 +32,7 @@ function handleBeforeMount(monaco) {
       "editorScrollbar.background": "#858585",
       "editorScrollbar.shadow": "none",
       "editorLineNumber.foreground": "#565656",
-      // "editorLineNumber.activeForeground": "#525151",
+      "editor.background": "#1e2129",
     },
   });
 
@@ -56,6 +57,41 @@ function handleBeforeMount(monaco) {
       "editorCursor.foreground": "#e07828",
       "editorIndentGuide.background": "#e0e0e0",
       "editorIndentGuide.activeBackground": "#e07828",
+    },
+  });
+
+  monaco.editor.defineTheme("catppuccin", {
+    base: "vs-dark",
+    inherit: true,
+    rules: [
+      { token: "comment", foreground: "6e6a86", fontStyle: "italic" },
+      { token: "keyword", foreground: "f5c2e7" },
+      { token: "string", foreground: "a6e3a1" },
+      { token: "number", foreground: "fab387" },
+      { token: "type", foreground: "89dceb" },
+      { token: "function", foreground: "b4befe" },
+      { token: "variable", foreground: "f9e2af" },
+      { token: "identifier", foreground: "cdd6f4" },
+    ],
+    colors: {
+      "editor.background": "#1e1e2e",
+      "editor.foreground": "#cdd6f4",
+      "editorLineNumber.foreground": "#6e6a86",
+      "editorLineNumber.activeForeground": "#f5c2e7",
+      "editorCursor.foreground": "#f5c2e7",
+      "editorIndentGuide.background": "#313244",
+      "editorIndentGuide.activeBackground": "#f5c2e7",
+      "editor.selectionBackground": "#585b70",
+      "editor.lineHighlightBackground": "#313244",
+      "scrollbarSlider.background": "#6e6a86aa",
+      "scrollbarSlider.hoverBackground": "#f5c2e7cc",
+      "scrollbarSlider.activeBackground": "#f5c2e7ff",
+      "editorWidget.background": "#1e1e2e",
+      "editorWidget.border": "#f5c2e7",
+      "editorSuggestWidget.background": "#1e1e2e",
+      "editorSuggestWidget.border": "#f5c2e7",
+      "editorSuggestWidget.foreground": "#cdd6f4",
+      "editorSuggestWidget.selectedBackground": "#313244",
     },
   });
 
@@ -144,9 +180,6 @@ function App() {
     setTimeout(() => {
       setSaveLabel("Save");
     }, 1500);
-    
-
-
   }
 
   const [layOut, setLayOut] = useState("horizontal");
@@ -155,18 +188,6 @@ function App() {
       prevLayout === "horizontal" ? "vertical" : "horizontal"
     );
   };
-
-
-// const [screenSize, setScreenSize] = useState("close");
-// const changeScreenSize = () => {
-//   setScreenSize((prevSize) =>
-//     prevSize === "close" ? "open" : "close"
-//   );
-
-
-// }
-
-
 
   const [srcDoc, setSrcDoc] = useState("");
   useEffect(() => {
@@ -194,50 +215,32 @@ function App() {
       {layOut === "horizontal" ? (
         <div className="grid-panel">
           <div className="top-grid">
-         
-            
-              <CodeEditor
-                language="html"
-               
-                value={html}
-                onChange={setHTML}
-                theme={currentTheme}
-                beforeMount={handleBeforeMount}
+            <CodeEditor
+              language="html"
+              value={html}
+              onChange={setHTML}
+              theme={currentTheme}
+              beforeMount={handleBeforeMount}
               layOut={layOut}
-              />
-            
-           
-              <CodeEditor 
-               
-                language="css"
-              
-                value={css}
-                onChange={setCSS}
-                theme={currentTheme}
-                beforeMount={handleBeforeMount}
-                layOut={layOut}
-              />
-            
-           
-              <CodeEditor
-                language="javascript"
-              
-                value={js}
-                onChange={setJS}
-                theme={currentTheme}
-                beforeMount={handleBeforeMount}
-                layOut={layOut}
-              />
-            
+            />
 
-            
-             
-           
-              
-              
-              
-            
-             
+            <CodeEditor
+              language="css"
+              value={css}
+              onChange={setCSS}
+              theme={currentTheme}
+              beforeMount={handleBeforeMount}
+              layOut={layOut}
+            />
+
+            <CodeEditor
+              language="javascript"
+              value={js}
+              onChange={setJS}
+              theme={currentTheme}
+              beforeMount={handleBeforeMount}
+              layOut={layOut}
+            />
           </div>
 
           <div className="code-output-container">
@@ -254,38 +257,33 @@ function App() {
       ) : (
         <div className="top-flex">
           <div className="editors-column">
-            
+            <CodeEditor
+              className="edit-comp"
+              language="html"
+              value={html}
+              onChange={setHTML}
+              theme={currentTheme}
+              beforeMount={handleBeforeMount}
+              layOut={layOut}
+            />
 
-          
-              <CodeEditor className="edit-comp"
-                language="html"
-                value={html}
-                onChange={setHTML}
-                theme={currentTheme}
-                beforeMount={handleBeforeMount}
-                layOut={layOut}
-              />
-        
-          
-              <CodeEditor 
-                language="css"
-                value={css}
-                onChange={setCSS}
-                theme={currentTheme}
-                beforeMount={handleBeforeMount}
-                layOut={layOut}
-              />
-        
-          
-              <CodeEditor
-                language="javascript"
-                value={js}
-                onChange={setJS}
-                theme={currentTheme}
-                beforeMount={handleBeforeMount}
-                layOut={layOut}
-              />
-       
+            <CodeEditor
+              language="css"
+              value={css}
+              onChange={setCSS}
+              theme={currentTheme}
+              beforeMount={handleBeforeMount}
+              layOut={layOut}
+            />
+
+            <CodeEditor
+              language="javascript"
+              value={js}
+              onChange={setJS}
+              theme={currentTheme}
+              beforeMount={handleBeforeMount}
+              layOut={layOut}
+            />
           </div>
 
           <div className="code-output-container">
@@ -294,8 +292,7 @@ function App() {
               srcDoc={srcDoc}
               width="100%"
               height="100%"
-              
-              outline='none'
+              outline="none"
               title="output"
               sandbox="allow-scripts allow-modals"
             ></iframe>

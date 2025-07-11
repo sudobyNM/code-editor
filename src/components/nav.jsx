@@ -5,7 +5,7 @@ export default function Nav({
   saveLocal,
   layOut,
   currentTheme,
-  saveLabel
+  saveLabel,
 }) {
   const clearLocalStorage = () => {
     localStorage.clear();
@@ -38,5 +38,3 @@ export default function Nav({
     </div>
   );
 }
-
-// export default Nav
