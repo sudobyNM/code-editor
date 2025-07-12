@@ -3,52 +3,44 @@ import { useState } from "react";
 
 import { Editor } from "@monaco-editor/react";
 
-function CodeEditor({ language, value, onChange, theme, beforeMount ,layOut }) {
-const [screenSize,setScreenSize] = useState("close");
+function CodeEditor({ language, value, onChange, theme, beforeMount, layOut }) {
+  const [screenSize, setScreenSize] = useState("close");
 
-const handleresize = () => {
-  setScreenSize((prevSize) => (prevSize === "close" ? "open" : "close"));
-}
+  const handleresize = () => {
+    setScreenSize((prevSize) => (prevSize === "close" ? "open" : "close"));
+  };
 
+  const editorStyle =
+    layOut === "horizontal"
+      ? {
+          minWidth: screenSize === "open" ? "80vw" : "0px",
 
-const editorStyle = 
+          transition: "all 0.3s",
+          background: "#23272f",
 
-  layOut === "horizontal"?
-  {
-  minWidth: screenSize === "open" ? "80vw" : "0px",
-  // height: "100%",
-  transition: "all 0.3s",
-  background: "#23272f",
-  // border: "1px solid #e97012",
-  display: "flex",
-  flexDirection: "column",
-  minHeight: 0,
-  flex: 1,
-  overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          minHeight: 0,
+          flex: 1,
+          overflow: "hidden",
+        }
+      : {
+          height: screenSize === "open" ? "80vh" : "20vh",
+          transition: "height 0.3s",
+          background: "#23272f",
 
-  }
-:
-
- {
-  // minWidth: screenSize === "open" ? "80vw" : "0px",
-  height: screenSize === "open" ? "80vh" : "20vh",
-  transition: "all 0.3s",
-  background: "#23272f",
-  // border: "1px solid #e97012",
-  display: "flex",
-  flexDirection: "column",
-  minHeight: 0,
-  flex: 'auto',
-  overflow: "hidden"
-};
-
-
+          display: "flex",
+          flexDirection: "column",
+          minHeight: 0,
+          flex: "auto",
+          overflow: "hidden",
+        };
 
   return (
     <div className="edit-container" style={editorStyle}>
       <div className="edit-header">
         <span className="edit-title">{language}</span>
-        <button onClick={handleresize}>
+        <button onClick={handleresize} title="expand editor">
           <img src="src/assets/resize.png" alt="resize btn" />
         </button>
       </div>
@@ -62,7 +54,7 @@ const editorStyle =
         value={value}
         onChange={onChange}
         theme={theme}
-        loading="building..."
+        loading={<div className="loading">Building...</div>}
         options={{
           fontFamily: "Fira Mono, Menlo, Monaco, 'Courier New', monospace",
           minimap: { enabled: false },

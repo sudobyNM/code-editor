@@ -189,15 +189,33 @@ function App() {
     );
   };
 
+  const [activeTab, setActiveTab] = useState("html");
+
+  function useSmallScreens(breakpoint = 768) {
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= breakpoint);
+
+    useEffect(() => {
+      function doResize() {
+        setIsMobile(window.innerWidth <= breakpoint);
+      }
+      window.addEventListener("resize", doResize);
+      return () => {
+        window.removeEventListener("resize", doResize);
+      };
+    }, [breakpoint]);
+    return isMobile;
+  }
+
+  const isMobile = useSmallScreens();
+
   const [srcDoc, setSrcDoc] = useState("");
   useEffect(() => {
     const timeout = setTimeout(() => {
       setSrcDoc(`<html>
                 <body>${html}</body>
                 <style>${css}</style>
-            
                 <script>${js}<\/script>
-              </html>`);
+                </html>`);
     }, 500);
     return () => clearTimeout(timeout);
   }, [html, css, js]);
@@ -212,7 +230,78 @@ function App() {
         saveLabel={saveLabel}
       />
 
-      {layOut === "horizontal" ? (
+      {isMobile ? (
+        <>
+          <div className="tab-btns">
+            <button
+              onClick={() => {
+                setActiveTab("html");
+              }}
+              className={activeTab === "html" ? "html" : ""}
+            >
+              HTML
+            </button>
+            <button
+              onClick={() => {
+                setActiveTab("css");
+              }}
+              className={activeTab === "css" ? "css" : ""}
+            >
+              CSS
+            </button>
+            <button
+              onClick={() => {
+                setActiveTab("javascript");
+              }}
+              className={activeTab === "javascript" ? "javascript" : ""}
+            >
+              JS
+            </button>
+          </div>
+          <div className="tabs-editor">
+            {activeTab === "html" && (
+              <CodeEditor
+                language="html"
+                value={html}
+                onChange={setHTML}
+                theme={currentTheme}
+                beforeMount={handleBeforeMount}
+              />
+            )}
+
+            {activeTab === "css" && (
+              <CodeEditor
+                language="css"
+                value={css}
+                onChange={setCSS}
+                theme={currentTheme}
+                beforeMount={handleBeforeMount}
+              />
+            )}
+
+            {activeTab === "javascript" && (
+              <CodeEditor
+                language="javascript"
+                value={js}
+                onChange={setJS}
+                theme={currentTheme}
+                beforeMount={handleBeforeMount}
+              />
+            )}
+          </div>
+
+          <div className="code-output-container">
+            <iframe
+              className="code-output"
+              srcDoc={srcDoc}
+              width="100%"
+              height="100%"
+              title="output"
+              sandbox="allow-scripts allow-modals"
+            ></iframe>
+          </div>
+        </>
+      ) : layOut === "horizontal" ? (
         <div className="grid-panel">
           <div className="top-grid">
             <CodeEditor
