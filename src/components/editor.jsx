@@ -14,10 +14,8 @@ function CodeEditor({ language, value, onChange, theme, beforeMount, layOut }) {
     layOut === "horizontal"
       ? {
           minWidth: screenSize === "open" ? "80vw" : "0px",
-
           transition: "all 0.3s",
           background: "#23272f",
-
           display: "flex",
           flexDirection: "column",
           minHeight: 0,
@@ -28,7 +26,6 @@ function CodeEditor({ language, value, onChange, theme, beforeMount, layOut }) {
           height: screenSize === "open" ? "80vh" : "20vh",
           transition: "height 0.3s",
           background: "#23272f",
-
           display: "flex",
           flexDirection: "column",
           minHeight: 0,
@@ -41,7 +38,7 @@ function CodeEditor({ language, value, onChange, theme, beforeMount, layOut }) {
       <div className="edit-header">
         <span className="edit-title">{language}</span>
         <button onClick={handleresize} title="expand editor">
-          <img src="src/assets/resize.png" alt="resize btn" />
+          <img src="/assets/resize.png" alt="resize btn" />
         </button>
       </div>
 
@@ -73,14 +70,11 @@ function CodeEditor({ language, value, onChange, theme, beforeMount, layOut }) {
             verticalScrollbarSize: 9,
           },
           fixedOverflowWidgets: true,
-
           glyphMargin: false,
           matchBrackets: "never",
           lineNumbersMinChars: 3,
-
           renderLineHighlight: "none",
           lineDecorationsWidth: 0,
-
           cursorSmoothCaretAnimation: true,
           formatOnPaste: true,
           formatOnType: true,

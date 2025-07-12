@@ -176,7 +176,7 @@ function App() {
     saveCSS();
     saveJS();
     saveTheme();
-    setSaveLabel("Saved!");
+    setSaveLabel("Saved !");
     setTimeout(() => {
       setSaveLabel("Save");
     }, 1500);
@@ -212,8 +212,11 @@ function App() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setSrcDoc(`<html>
+               
                 <body>${html}</body>
                 <style>${css}</style>
+              
+
                 <script>${js}<\/script>
                 </html>`);
     }, 500);

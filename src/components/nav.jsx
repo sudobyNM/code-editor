@@ -14,11 +14,11 @@ export default function Nav({
   return (
     <div className="navbar">
       <div className="logo">
-        <img src="src/assets/dev-icon.svg" alt="logo" />
+        <img src="/assets/dev-icon.svg" alt="logo" />
       </div>
       <div className="btn-container">
         <button className="btn" title="save changes" onClick={saveLocal}>
-          <img src="src/assets/cloud-solid.svg" alt="save btn" />
+          <img src="/assets/cloud-solid.svg" alt="save btn" />
           {saveLabel}
         </button>
         <button
@@ -26,10 +26,10 @@ export default function Nav({
           title="clear storage"
           onClick={clearLocalStorage}
         >
-          <img src="src/assets/trash.svg" alt="delete btn" />
+          <img src="/assets/trash.svg" alt="delete btn" />
         </button>
         <button className="btn" title="change layout" onClick={layOut}>
-          <img src="src/assets/layout-icon.svg" alt="layout btn" />
+          <img src="/assets/layout-icon.svg" alt="layout btn" />
         </button>
         <button className="btn" title="change theme" onClick={onThemeChange}>
           Theme
