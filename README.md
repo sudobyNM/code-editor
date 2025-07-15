@@ -3,7 +3,7 @@
 ![Build](https://img.shields.io/badge/build-passing-brightgreen)
 ![React](https://img.shields.io/badge/React-19.x-blue)
 ![Vite](https://img.shields.io/badge/Vite-7.x-purple)
-A modern, responsive, and extensible online code editor inspired by CodePen. Built with React and Monaco Editor, featuring real-time preview, custom themes, Emmet support, and local persistence. Designed for productivity, learning, and rapid prototyping.
+## A modern, responsive, and extensible online code editor inspired by CodePen. Built with React and Monaco Editor, featuring real-time preview, custom themes, Emmet support, and local persistence. Designed for productivity, learning, and rapid prototyping.
 
 # Features
 - Monaco Editor with Emmet support for HTML, CSS, and JS
