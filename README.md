@@ -3,7 +3,7 @@
 A modern, feature-rich web-based code editor built with React and Monaco Editor that provides real-time HTML, CSS, and JavaScript editing with live preview capabilities.
 
 ![CodeFine Editor](https://img.shields.io/badge/React-19.1.0-blue?style=for-the-badge&logo=react)
-![Monaco Editor](https://img.shields.io/badge/Monaco-Editor-4.7.0-green?style=for-the-badge)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow?style=for-the-badge&logo=javascript)
 ![Vite](https://img.shields.io/badge/Vite-7.0.0-purple?style=for-the-badge&logo=vite)
 
 ## 🚀 Features
